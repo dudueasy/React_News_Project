@@ -2,6 +2,8 @@ import React from 'react'
 import {Card} from 'antd'
 import {Router, Route, Link, browserHistory} from 'react-router'
 
+// 引用示例: <PCNewsBlock count='20' type='top' bordered={false}/>
+
 export default class PCNewsBlock extends React.Component {
     constructor() {
         super()
@@ -42,7 +44,7 @@ export default class PCNewsBlock extends React.Component {
                     return (
                         <li key={index}>
                             {/* 为每一个<link>对象定义一个跳转链接,  uniquekey 是来自json数据中的key*/}
-                            <Link to={`details/${newsItem.uniquekey}`} target="_blank">
+                            <Link to={`details/${newsItem.uniquekey}/${this.props.type}`} target="_blank">
                                 {newsItem.title}
                             </Link>
                         </li>)

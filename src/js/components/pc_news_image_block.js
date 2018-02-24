@@ -2,6 +2,8 @@ import React from 'react'
 import {Card} from 'antd'
 import {Router, Route, Link, browserHistory} from 'react-router'
 
+// 引用示例: <PCNewsImageBlock cardTitle='国际头条' count='6' type='guoji' width='400px' imageWidth='112px'/>
+
 export default class PCNewsImageBlock extends React.Component {
     constructor() {
         super()
@@ -18,11 +20,6 @@ export default class PCNewsImageBlock extends React.Component {
             method: 'GET'
         }
 
-        function consoler(n) {
-            console.log(n)
-        }
-
-        setTimeout(consoler(11),1000)
         // 获取新闻列表的api
         // 聚合数据的api (仅支持JSONP) `http://v.juhe.cn/toutiao/index?type=${this.props.type}&key=3d57cecdb5bf7d47b1781d2384d6fc91`
 
@@ -30,7 +27,6 @@ export default class PCNewsImageBlock extends React.Component {
         fetch(`http://newsapi.gugujiankong.com/Handler.ashx?`
             + `action=getnews&type=${this.props.type}&count=${this.props.count}`
             , fetchOptions)
-
             .then(response => response.json())
             .then(json => this.setState({news: json}))
     }
@@ -57,14 +53,13 @@ export default class PCNewsImageBlock extends React.Component {
                     return (
                         <div key={index} class="imageblock">
                             {/* 为每一个<link>对象定义一个跳转链接,  uniquekey 是来自json数据中的key*/}
-                            <Link to={`details/${newsItem.uniquekey}`} target="_blank">
+                            <Link to={`details/${newsItem.uniquekey}/${this.props.type}`} target="_blank">
                                 <div>
                                     <img src={newsItem.thumbnail_pic_s} style={styleImage} alt="pic"/>
                                 </div>
                                 <div class="custom-card">
                                     <h3 style={styleH3}>{newsItem.title}</h3>
                                     <p style={styleH3}>来源: {newsItem.author_name}</p>
-
                                 </div>
                             </Link>
                         </div>)

@@ -1,7 +1,10 @@
 import React from 'react'
-import {Row, Col} from 'antd'
+import {Row, Col, BackTop} from 'antd'
 import PCHeader from './pc_header'
 import PCFooter from './pc_footer'
+import PCNewsImageBlock from './pc_news_image_block'
+
+// 引用示例 (路由):  <Route path='/details/:uniquekey(/:type)' component={PCNewsDetails}></Route>
 
 export default class PCNewsDetails extends React.Component {
     constructor() {
@@ -45,11 +48,15 @@ export default class PCNewsDetails extends React.Component {
 
                         </div>
                     </Col>
-                    <Col span="6"></Col>
+                    <Col span="6">
+                        <PCNewsImageBlock cardTitle='相关新闻' count='40' type={this.props.params.type} imageWidth='150px'/>
+
+                    </Col>
                     <Col span="2"></Col>
 
                 </Row>
                 <PCFooter/>
+                <BackTop/>
             </div>
         )
     }
