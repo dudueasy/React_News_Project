@@ -18,10 +18,19 @@ export default class PCNewsImageBlock extends React.Component {
             method: 'GET'
         }
 
+        function consoler(n) {
+            console.log(n)
+        }
+
+        setTimeout(consoler(11),1000)
         // 获取新闻列表的api
+        // 聚合数据的api (仅支持JSONP) `http://v.juhe.cn/toutiao/index?type=${this.props.type}&key=3d57cecdb5bf7d47b1781d2384d6fc91`
+
+        // Parry 提供的API
         fetch(`http://newsapi.gugujiankong.com/Handler.ashx?`
             + `action=getnews&type=${this.props.type}&count=${this.props.count}`
             , fetchOptions)
+
             .then(response => response.json())
             .then(json => this.setState({news: json}))
     }
@@ -61,22 +70,6 @@ export default class PCNewsImageBlock extends React.Component {
                         </div>)
                 })
             : <p>正在加载新闻</p>
-
-        // const newsList = news.length
-        //     ? news.map((newsItem, index) => (
-        //         <div key={index} class="imageblock">
-        //             <Link to={`details/${newsItem.uniquekey}`} target="_blank">
-        //                 <div class="custom-image">
-        //                     <img alt="" style={styleImage} src={newsItem.thumbnail_pic_s}/>
-        //                 </div>
-        //                 <div class="custom-card">
-        //                     <h3 style={styeH3}>{newsItem.title}</h3>
-        //                     <p>{newsItem.author_name}</p>
-        //                 </div>
-        //             </Link>
-        //         </div>
-        //     ))
-        //     : '没有加载到任何新闻';
 
         return (
             <div class="topNewsList">

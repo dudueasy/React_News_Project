@@ -16,15 +16,21 @@ export default class PCNewsBlock extends React.Component {
     componentWillMount() {
         // 定义 fetch() 的选项
         let fetchOptions = {
-            method: 'GET'
+            method: 'GET',
         }
 
         // 获取新闻列表的api
+
+        // 聚合数据的API (不支持跨域, 只能使用JSONP)
+        // let url = `http://v.juhe.cn/toutiao/index?type=${this.props.type}&key=3d57cecdb5bf7d47b1781d2384d6fc91`)
+
+        // 使用 Parry 提供的API (新闻是去年的)
         fetch(`http://newsapi.gugujiankong.com/Handler.ashx?`
             + `action=getnews&type=${this.props.type}&count=${this.props.count}`
-            , fetchOptions)
-            .then(response => response.json())
-            .then(json => this.setState({news: json}))
+            ,fetchOptions)
+             .then(response => response.json())
+             .then(json => this.setState({news: json}))
+
     }
 
     render() {
