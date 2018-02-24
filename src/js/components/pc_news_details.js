@@ -3,6 +3,8 @@ import {Row, Col, BackTop} from 'antd'
 import PCHeader from './pc_header'
 import PCFooter from './pc_footer'
 import PCNewsImageBlock from './pc_news_image_block'
+import CommonComments from './common_comment'
+
 
 // 引用示例 (路由):  <Route path='/details/:uniquekey(/:type)' component={PCNewsDetails}></Route>
 
@@ -41,18 +43,20 @@ export default class PCNewsDetails extends React.Component {
             <div>
                 <PCHeader/>
                 <Row>
-                    <Col span="2"></Col>
-                    <Col span="14" className='container'>
-                        {/*插入特殊字符 (这里的需求是由api的返回数据决定的) */}
+                    <Col span={2}/>
+                    <Col span={14} className='container'>
+
+                        {/* 插入HTML字符 (这个需求是由api的返回数据决定的) */}
                         <div className="articleContainer" dangerouslySetInnerHTML={this.createMarkup()}>
-
                         </div>
-                    </Col>
-                    <Col span="6">
-                        <PCNewsImageBlock cardTitle='相关新闻' count='40' type={this.props.params.type} imageWidth='150px'/>
 
+                        {/*加载评论模块*/}
+                        <CommonComments uniquekey={this.props.params.uniquekey} count={5}/>
                     </Col>
-                    <Col span="2"></Col>
+                    <Col span={6}>
+                        <PCNewsImageBlock cardTitle='相关新闻' count='40' type={this.props.params.type} imageWidth='150px'/>
+                    </Col>
+                    <Col span={2}/>
 
                 </Row>
                 <PCFooter/>
