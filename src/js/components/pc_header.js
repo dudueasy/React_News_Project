@@ -30,10 +30,10 @@ class PCHeader extends React.Component {
     }
 
 // 在组件被渲染之前会执行
-    componentWillMount(){
+    componentWillMount() {
         // 根据 localStorage 来决定用户登陆状态
-        if (localStorage.userid && localStorage.userNickName){
-            this.setState({hasLogin:true, userNickName:localStorage.userNickName})
+        if (localStorage.userid && localStorage.userNickName) {
+            this.setState({hasLogin: true, userNickName: localStorage.userNickName})
         }
     }
 
@@ -115,7 +115,7 @@ class PCHeader extends React.Component {
         localStorage.userid = ''
         localStorage.userNickName = ''
         // 重置 state
-        this.setState({hasLogin:false})
+        this.setState({hasLogin: false})
         message.success('用户已注销')
     }
 
@@ -129,23 +129,23 @@ class PCHeader extends React.Component {
             <Menu.Item key='logout' class='register'>
                 <Button type="primary" htmlType="button">{this.state.userNickName}</Button>
                 &nbsp;&nbsp;
-                <Link to="" target='_blank'>
+                <Link target='_blank' to='/usercenter'>
                     <Button type='dashed' htmlType='button'>个人中心</Button>
                 </Link>
                 &nbsp;&nbsp;
-                <Link to="" target='_self'>
-                    <Button type='ghost' htmlType='button' onClick={this.logout.bind(this)}>退出</Button>
-                </Link>
+                <Button type='ghost' htmlType='button' onClick={this.logout.bind(this)}>退出</Button>
+
             </Menu.Item>
             :
             <Menu.Item key='register' class='register'>
                 <Icon type="user"/>注册登录
             </Menu.Item>
 
+
         return (
             <header>
                 <Row>
-                    <Col span={2}></Col>
+                    <Col span={1}/>
                     <Col span={4}>
                         <a href="/" class="logo">
                             <img src="src/images/logo.png" alt="logo"/>
@@ -176,7 +176,6 @@ class PCHeader extends React.Component {
                             <Menu.Item key='tecnology'>
                                 <Icon type="appstore"/>科技
                             </Menu.Item>
-                            {userShow}
                         </Menu>
                         <Modal title='用户中心' wrapClassName='vertical-center-modal'
                                visible={this.state.modalVisible}
@@ -219,7 +218,13 @@ class PCHeader extends React.Component {
                         </Modal>
                     </Col>
 
-                    <Col span={2}></Col>
+                    <Col span={2}>
+                        <Menu mode='horizontal' onClick={this.handleClick.bind(this)}>
+                            {userShow}
+                        </Menu>
+                    </Col>
+                    <Col span={1}/>
+
                 </Row>
             </header>
         )

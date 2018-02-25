@@ -3,6 +3,9 @@ import MobileHeader from './mobile_header'
 import MobileFooter from "./mobile_footer";
 import {Row, Col, BackTop} from 'antd'
 
+import CommonComments from './common_comment'
+
+
 export default class MobileNewsDetails extends React.Component {
     constructor() {
         super()
@@ -46,6 +49,8 @@ export default class MobileNewsDetails extends React.Component {
                         </Col>
                     </Row>
                 </div>
+                {/*加载评论组件*/}
+                <CommonComments uniquekey={this.props.params.uniquekey} count={5}/>
                 <MobileFooter/>
                 <BackTop/>
             </div>

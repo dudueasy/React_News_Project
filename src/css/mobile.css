@@ -969,13 +969,24 @@ a.img-wrap {
 
 }
 
-.img-wrap>img {
+.img-wrap > img {
     position: relative !important;
-    width:100% !important;
+    width: 100% !important;
     display: block;
 }
 
-.ant-back-top{
-    right:20px !important;
+.ant-back-top {
+    right: 20px !important;
 }
+
+.comment form{
+    padding: 16px;
+}
+
+.comment .ant-card-body p{
+    overflow: hidden;
+    white-space: nowrap !important;
+    text-overflow:ellipsis;
+}
+
 /* react-pull-to-refresh CSS */

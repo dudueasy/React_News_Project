@@ -1,10 +1,7 @@
 import React from 'react';
 import {
-    Row, Col,
-    Menu, Icon,
-    Tabs, message,
-    Form, Input,
-    Button, Card
+    Row, Col, Menu, Icon, Tabs, message, Form, Input,
+    Button, Card, notification
 } from 'antd';
 
 const FormItem = Form.Item
@@ -39,8 +36,8 @@ class CommonComments extends React.Component {
     }
 
     // 评论提交失败处理函数
-    errorHandler(){
-        message.error('提交失败, 请登陆后尝试')
+    errorHandler() {
+        message.error('请求失败')
     }
 
     // <Form> 表单提交处理函数
@@ -57,13 +54,23 @@ class CommonComments extends React.Component {
             + `action=comment&userid=${localStorage.userid}&uniquekey=${this.props.uniquekey}&commnet=${formdata.remark}`
         fetch(url, fetchOptions)
             .then(response => response.json(), this.errorHandler)
-
-            // 提供了评论之后重新执行生命周期函数来重新加载组件自身, 实现评论的实时更新
+            // 获取评论之后重新执行生命周期函数来重新加载组件自身, 实现评论的实时更新
             .then(json => this.componentDidMount())
     }
 
+    // 收藏按钮点击处理函数
+    addUserFavor() {
+        let fetchOptions = {
+            method: 'GET'
+        }
 
+        let url = `http://newsapi.gugujiankong.com/Handler.ashx?`
+            + `action=uc&userid=${localStorage.userid}&uniquekey=${this.props.uniquekey}`
 
+        fetch(url, fetchOptions)
+            .then(response => response.json(),this.errorHandler)
+            .then(json=>{notification.success({message:'ReactNews提醒', description:'收藏成功'})})
+    }
 
     render() {
         let {getFieldProps} = this.props.form
@@ -73,7 +80,8 @@ class CommonComments extends React.Component {
         let commentList = comments.length ?
             comments.slice([-5]).map((comment, index) => (
                     <Card bordered={false} key={index} title={'用户: ' + comment.UserName}
-                          extra={<a href="#">发表于{comment.datetime}</a>}>
+                          extra={<a href="#"> 发表于{comment.datetime}</a>} noHovering={true}
+                    >
                         <p>{comment.Comments}</p>
                     </Card>
                 )
@@ -85,15 +93,20 @@ class CommonComments extends React.Component {
             <div class="comment">
                 <Row>
                     <Col span={24}>
-                        {commentList}
+                        <Card title='用户评论列表 (只显示最近5条)' bordered={false} noHovering={true}>
+                            {commentList}
+                        </Card>
                         <Form onSubmit={this.handleSubmit.bind(this)}>
                             <FormItem label='您的评论'>
                                 <Input type='textarea'
                                        placeholder='请输入评论' {...getFieldProps('remark', {initialValue: ''})}/>
                             </FormItem>
                             <Button type='primary' htmlType='submit'>提交评论</Button>
+                            &nbsp;&nbsp;
+                            <Button type='primary' htmlType='button' onClick={this.addUserFavor.bind(this)}>
+                                收藏文章
+                            </Button>
                         </Form>
-
                     </Col>
                 </Row>
             </div>

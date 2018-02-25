@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card} from 'antd'
-import {Router, Route, Link, browserHistory} from 'react-router'
+import {Router, Route, Link, browserHistory, } from 'react-router'
 
 // 引用示例: <PCNewsImageBlock cardTitle='国际头条' count='6' type='guoji' width='400px' imageWidth='112px'/>
 
@@ -68,7 +68,7 @@ export default class PCNewsImageBlock extends React.Component {
 
         return (
             <div class="topNewsList">
-                <Card title={this.props.cardTitle} bordered={true}
+                <Card title={this.props.cardTitle} bordered={false} noHovering={true}
                       style={{width: this.props.width}}>
                     {newsList}
                 </Card>

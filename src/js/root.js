@@ -7,10 +7,13 @@ import MediaQuery from 'react-responsive'
 // 导入pc端的组件
 import PCIndex from './components/pc_index'
 import PCNewsDetails from './components/pc_news_details'
+import PCUserCenter from './components/pc_usercenter'
 
 // 导入移动端的组件
 import MobileIndex from './components/mobile_index'
 import MobileDetail from './components/mobile_news_details'
+import MobileUserCenter from './components/mobile_usercenter'
+
 
 
 //程序入口
@@ -22,6 +25,8 @@ export default class Root extends React.Component {
                     <Router history={hashHistory}>
                         <Route path='/' component={PCIndex}></Route>
                         <Route path='/details/:uniquekey(/:type)' component={PCNewsDetails}></Route>
+                        <Route path='/usercenter' component={PCUserCenter}></Route>
+
 
                     </Router>
                 </MediaQuery>
@@ -29,6 +34,8 @@ export default class Root extends React.Component {
                     <Router history={hashHistory}>
                         <Route path='/' component={MobileIndex}></Route>
                         <Route path='/details/:uniquekey(/:type)' component={MobileDetail}></Route>
+                        <Route path='/usercenter' component={MobileUserCenter}></Route>
+
 
                     </Router>
                 </MediaQuery>
