@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col, Tabs, Carousel} from 'antd'
+import {Row, Col, Tabs, Carousel, List, Card} from 'antd'
 import PCNewsBlock from './pc_news_block'
 import PCNewsImageBlock from './pc_news_image_block'
 
@@ -37,12 +37,10 @@ export default class PCNewsContainer extends React.Component {
                         </div>
                         <Tabs class='tabs_news'>
                             <TabPane tab='头条新闻' key='1'>
-                                <PCNewsBlock count='20' type='top' bordered={false}/>
-                            </TabPane>
-                            <TabPane tab="国际" key="2">
-                                <PCNewsBlock count={22} type="guoji" bordered={false}/>
+                                <PCNewsBlock count='20' type={this.props.current} bordered={false}/>
                             </TabPane>
                         </Tabs>
+
                         <div>
                             <PCNewsImageBlock cardTitle='国内新闻' count='8' type='guonei'
                                               width='100%' imageWidth='132px'/>

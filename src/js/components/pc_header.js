@@ -45,6 +45,12 @@ class PCHeader extends React.Component {
         if (e.key === 'register') {
             this.setModalVisible(true)
         }
+
+
+    }
+
+    handleNavClick(e) {
+        this.props.navHandler(e.key)
         this.setState({current: e.key})
     }
 
@@ -153,27 +159,27 @@ class PCHeader extends React.Component {
                         </a>
                     </Col>
                     <Col span={16}>
-                        <Menu mode='horizontal' onClick={this.handleClick.bind(this)}
+                        <Menu mode='horizontal' onClick={this.handleNavClick.bind(this)}
                               selectedKeys={[this.state.current]}>
                             <Menu.Item key='top'>
                                 <Icon type="appstore"/>头条
                             </Menu.Item>
-                            <Menu.Item key='entertainment'>
+                            <Menu.Item key='yule'>
                                 <Icon type="appstore"/>娱乐
                             </Menu.Item>
-                            <Menu.Item key='society'>
+                            <Menu.Item key='shehui'>
                                 <Icon type="appstore"/>社会
                             </Menu.Item>
-                            <Menu.Item key='domestic'>
+                            <Menu.Item key='guonei'>
                                 <Icon type="appstore"/>国内
                             </Menu.Item>
-                            <Menu.Item key='international'>
+                            <Menu.Item key='guoji'>
                                 <Icon type="appstore"/>国际
                             </Menu.Item>
-                            <Menu.Item key='sports'>
+                            <Menu.Item key='tiyu'>
                                 <Icon type="appstore"/>体育
                             </Menu.Item>
-                            <Menu.Item key='tecnology'>
+                            <Menu.Item key='keji'>
                                 <Icon type="appstore"/>科技
                             </Menu.Item>
                         </Menu>
@@ -189,7 +195,7 @@ class PCHeader extends React.Component {
                                 <TabPane tab="注册" key="2">
                                     <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
                                         <FormItem label="账户">
-                                            {getFieldDecorator('r_userName')(<Input placeholder="请输入您的账号" />)}
+                                            {getFieldDecorator('r_userName')(<Input placeholder="请输入您的账号"/>)}
                                         </FormItem>
                                         <FormItem label="密码">
                                             {getFieldDecorator('r_password')(<Input type="password"

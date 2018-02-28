@@ -48,6 +48,9 @@
     margin-top: 5px !important;
 }
 
+.antd-newscontainer-card{
+    float: left;
+}
 .ant-card-head-title {
     text-align: left !important;
 }

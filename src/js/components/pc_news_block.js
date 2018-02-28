@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card} from 'antd'
-import {Router, Route, Link} from 'react-router-dom'
+import {Router, Route, Link, browserHistory} from 'react-router-dom'
 
 // 引用示例: <PCNewsBlock count='20' type='top' bordered={false}/>
 
@@ -9,8 +9,21 @@ export default class PCNewsBlock extends React.Component {
         super()
 
         // this.state.news 用来接收fetch() 获得的数据.
+        // this.state.type 用来根据外层传来的参数而变化.
         this.state = {
-            news: ''
+            news: '',
+            type: 'top',
+        }
+    }
+
+    // 生命周期函数, 当该组件接收的参数变化时执行
+    componentWillReceiveProps(nextProps) {
+
+        // 判断新参数中的 .type 是否一致
+        if (nextProps.type !== this.props.type) {
+            // 更改 state而不是 props(props不应该被自身修改), 允许 componentDidMount 按照新的 this.state.type 来执行.
+            this.setState({type: nextProps.type}, this.componentWillMount)
+
         }
     }
 
@@ -28,10 +41,10 @@ export default class PCNewsBlock extends React.Component {
 
         // 使用 Parry 提供的API (新闻是去年的)
         fetch(`http://newsapi.gugujiankong.com/Handler.ashx?`
-            + `action=getnews&type=${this.props.type}&count=${this.props.count}`
-            ,fetchOptions)
-             .then(response => response.json())
-             .then(json => this.setState({news: json}))
+            + `action=getnews&type=${this.state.type}&count=${this.props.count}`
+            , fetchOptions)
+            .then(response => response.json())
+            .then(json => this.setState({news: json}))
 
     }
 
@@ -44,7 +57,7 @@ export default class PCNewsBlock extends React.Component {
                     return (
                         <li key={index}>
                             {/* 为每一个<link>对象定义一个跳转链接,  uniquekey 是来自json数据中的key*/}
-                            <Link to={`details/${newsItem.uniquekey}/${this.props.type}`} target="_blank">
+                            <Link to={`details/${newsItem.uniquekey}/${this.state.type}`} target="_blank">
                                 {newsItem.title}
                             </Link>
                         </li>)
