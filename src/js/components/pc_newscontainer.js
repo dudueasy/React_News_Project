@@ -15,12 +15,12 @@ export default class PCNewsContainer extends React.Component {
             speed: 500
         }
         return (
-            <div>
+            <div class="content">
                 <Row>
-                    <Col span={2}>
+                    <Col span={3}>
                     </Col>
 
-                    <Col span={20} class='container'>
+                    <Col span={18} class='container'>
                         {/*leftContainer 用来放一个轮播图和图形新闻块, 轮播图使用了静态图片*/}
                         <div className="leftContainer">
                             <div class="carousel">
@@ -35,11 +35,10 @@ export default class PCNewsContainer extends React.Component {
                             <PCNewsImageBlock cardTitle='国际头条' count='6' type='guoji'
                                               width='400px' imageWidth='112px'/>
                         </div>
-                        <Tabs class='tabs_news'>
-                            <TabPane tab='头条新闻' key='1'>
-                                <PCNewsBlock count='20' type={this.props.current} bordered={false}/>
-                            </TabPane>
-                        </Tabs>
+                        {/*最重要的 PcNewsBlock*/}
+                        <Card class='tabs_news' bordered={false} noHovering={true}>
+                            <PCNewsBlock count='20' type={this.props.current} bordered={false}/>
+                        </Card>
 
                         <div>
                             <PCNewsImageBlock cardTitle='国内新闻' count='8' type='guonei'
@@ -47,11 +46,9 @@ export default class PCNewsContainer extends React.Component {
                             <PCNewsImageBlock cardTitle='娱乐新闻' count='16' type='yule'
                                               width='100%' imageWidth='132px'/>
                         </div>
-
-
                     </Col>
 
-                    <Col span={2}>
+                    <Col span={3}>
                     </Col>
                 </Row>
             </div>

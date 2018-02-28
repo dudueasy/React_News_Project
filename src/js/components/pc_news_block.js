@@ -16,6 +16,7 @@ export default class PCNewsBlock extends React.Component {
         }
     }
 
+
     // 生命周期函数, 当该组件接收的参数变化时执行
     componentWillReceiveProps(nextProps) {
 
@@ -44,7 +45,9 @@ export default class PCNewsBlock extends React.Component {
             + `action=getnews&type=${this.state.type}&count=${this.props.count}`
             , fetchOptions)
             .then(response => response.json())
-            .then(json => this.setState({news: json}))
+            .then(json => {
+                this.setState({news: json});
+            })
 
     }
 
@@ -66,11 +69,10 @@ export default class PCNewsBlock extends React.Component {
 
         return (
             <div class="topNewsList">
-                <Card bordered={this.props.bordered}>
-                    <ul>
-                        {newsList}
-                    </ul>
-                </Card>
+                <ul>
+                    {newsList}
+                </ul>
+
             </div>
         )
     }

@@ -108,18 +108,19 @@ section {
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5
 }
-
+section.m_article{
+    width:100%;
+}
 .m_article {
     font-size: 14px;
-    padding: .2rem 0;
+    padding: .2rem 0.1rem;
     border-bottom: 1px solid #e5e5e5;
-    margin: 0 .3rem
 }
 
 .m_article .m_article_img {
     float: left;
-    width: 27%;
-    height: 1.4rem;
+    /*width: 27%;*/
+    /*height: 1.4rem;*/
     overflow: hidden;
     position: relative;
     margin-right: .2rem
@@ -141,7 +142,7 @@ section {
 }
 
 .m_article .m_article_img img {
-    width: 100%;
+    width: 100px;
     display: block;
     min-height: 1.4rem
 }
@@ -989,4 +990,11 @@ a.img-wrap {
     text-overflow:ellipsis;
 }
 
+.m_carousel img{
+    width:100%;
+}
+
+.m_article.clearfix{
+    margin:0;
+}
 /* react-pull-to-refresh CSS */

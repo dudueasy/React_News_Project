@@ -23,7 +23,7 @@ export default class MobileIndex extends React.Component {
                 <MobileHeader/>
                 <Tabs>
                     <TabPane key='1' tab='头条'>
-                        <div class="carousel">
+                        <div class="m_carousel">
                             <Carousel {...settings}>
                                 <div><img src="/src/images/carousel_1.jpg" alt=""/></div>
                                 <div><img src="/src/images/carousel_2.jpg" alt=""/></div>

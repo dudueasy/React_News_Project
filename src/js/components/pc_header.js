@@ -151,14 +151,14 @@ class PCHeader extends React.Component {
         return (
             <header class="pc-header">
                 <Row>
-                    <Col span={1}/>
+                    <Col span={2}/>
                     <Col span={4}>
                         <a href="/" class="logo">
                             <img src="/src/images/logo.png" alt="logo"/>
                             <span>ReactNews</span>
                         </a>
                     </Col>
-                    <Col span={16}>
+                    <Col span={14}>
                         <Menu mode='horizontal' onClick={this.handleNavClick.bind(this)}
                               selectedKeys={[this.state.current]}>
                             <Menu.Item key='top'>
@@ -175,9 +175,6 @@ class PCHeader extends React.Component {
                             </Menu.Item>
                             <Menu.Item key='guoji'>
                                 <Icon type="appstore"/>国际
-                            </Menu.Item>
-                            <Menu.Item key='tiyu'>
-                                <Icon type="appstore"/>体育
                             </Menu.Item>
                             <Menu.Item key='keji'>
                                 <Icon type="appstore"/>科技
@@ -229,7 +226,7 @@ class PCHeader extends React.Component {
                             {userShow}
                         </Menu>
                     </Col>
-                    <Col span={1}/>
+                    <Col span={2}/>
 
                 </Row>
             </header>

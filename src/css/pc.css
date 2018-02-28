@@ -12,12 +12,15 @@
     font-size: 24px;
     padding-left: 5px;
 }
-.pc-header{
-    min-width:1200px;
+
+.pc-header {
+    min-width: 1200px;
 }
-.news-detail-wrapper{
-    min-width:1200px;
+
+.news-detail-wrapper {
+    min-width: 1200px;
 }
+
 .footer {
     text-align: center;
 }
@@ -48,9 +51,10 @@
     margin-top: 5px !important;
 }
 
-.antd-newscontainer-card{
+.antd-newscontainer-card {
     float: left;
 }
+
 .ant-card-head-title {
     text-align: left !important;
 }
@@ -452,12 +456,16 @@ a.img-wrap {
     display: block;
 }
 
-.comment form{
-    padding:16px;
+.comment form {
+    padding: 16px;
 }
 
-.comment .ant-card-body p{
+.comment .ant-card-body p {
     overflow: hidden;
     white-space: nowrap;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
+}
+
+div.content {
+    min-width: 1200px;
 }

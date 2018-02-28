@@ -8,14 +8,15 @@ export default class PCIndex extends React.Component {
     constructor() {
         super()
         this.state = {
-            current: 'top'
+            current: 'top',
         }
     }
 
     handleNavClick(value) {
-        console.log(value)
+        // console.log(value)
         this.setState({current: value})
     }
+
 
     render() {
         return (
