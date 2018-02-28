@@ -8,7 +8,7 @@ import {
     Modal,
 } from 'antd';
 
-import {Link} from 'react-router'
+import {Link} from 'react-router-dom'
 
 const FormItem = Form.Item
 const SubMenu = Menu.SubMenu
@@ -109,11 +109,11 @@ class MobileHeader extends React.Component {
     }
 
     render() {
-        let {getFieldProps} = this.props.form
+        let {getFieldDecorator} = this.props.form
 
         const userShow = this.state.hasLogin ?
             <Link to='/usercenter'>
-                <Icon type="inbox" />
+                <Icon type="inbox"/>
             </Link>
             :
             <Icon type="user" onClick={this.login.bind(this)}/>
@@ -122,8 +122,10 @@ class MobileHeader extends React.Component {
         return (
             <div id='mobileheader'>
                 <header>
-                    <img src="src/images/logo.png" alt="logo"/>
-                    <span>ReactNews</span>
+                    <Link to={'/'}>
+                        <img src="/src/images/logo.png" alt="logo"/>
+                        <span>ReactNews</span>
+                    </Link>
                     {userShow}
                 </header>
                 <Modal title='用户中心' wrapClassName='vertical-center-modal'
@@ -138,15 +140,14 @@ class MobileHeader extends React.Component {
                         <TabPane tab="注册" key="2">
                             <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
                                 <FormItem label="账户">
-                                    <Input placeholder="请输入您的账号" {...getFieldProps('r_userName')}/>
+                                    {getFieldDecorator('r_userName')(<Input placeholder="请输入您的账号"/>)}
                                 </FormItem>
                                 <FormItem label="密码">
-                                    <Input type="password"
-                                           placeholder="请输入您的密码" {...getFieldProps('r_password')}/>
+                                    {getFieldDecorator('r_password')(<Input type="password" placeholder="请输入您的密码"/>)}
                                 </FormItem>
                                 <FormItem label="确认密码">
-                                    <Input type="password"
-                                           placeholder="请再次输入您的密码" {...getFieldProps('r_confirmPassword')}/>
+                                    {getFieldDecorator('r_confirmPassword')(<Input type="password"
+                                                                                   placeholder="请再次输入您的密码"/>)}
                                 </FormItem>
                                 <Button type="primary" htmlType="submit">注册</Button>
                             </Form>
@@ -154,11 +155,10 @@ class MobileHeader extends React.Component {
                         <TabPane tab="登陆" key="1">
                             <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
                                 <FormItem label="账户">
-                                    <Input placeholder="请输入您的账号" {...getFieldProps('userName')}/>
+                                    {getFieldDecorator('userName')(<Input placeholder="请输入您的账号"/>)}
                                 </FormItem>
                                 <FormItem label="密码">
-                                    <Input type="password"
-                                           placeholder="请输入您的密码" {...getFieldProps('password')}/>
+                                    {getFieldDecorator('password')(<Input type="password" placeholder="请输入您的密码"/>)}
                                 </FormItem>
                                 <Button type="primary" htmlType="submit">登陆</Button>
                             </Form>

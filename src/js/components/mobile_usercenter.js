@@ -11,7 +11,6 @@ import {
 
 import MobileHeader from './mobile_header'
 import MobileFooter from './mobile_footer'
-import {Link} from 'react-router'
 
 const TabPane = Tabs.TabPane
 const FormItem = Form.Item

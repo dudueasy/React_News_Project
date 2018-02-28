@@ -23,7 +23,7 @@ class CommonComments extends React.Component {
             method: 'GET'
         }
 
-        // url中的uniquekey从react-router的路由参数中获取. 所以这里使用 this.props.params.key 来取值
+        // url中的uniquekey从react-router的路由参数中获取. 所以这里使用 this.props.match.params.key 来取值
         // 在 <route> 中应该写为 <Route component={PCNewsDetails} path='/details/:uniquekey'></Route>
         let url = `http://newsapi.gugujiankong.com/Handler.ashx?` +
             `action=getcomments&uniquekey=${this.props.uniquekey}`
@@ -68,12 +68,14 @@ class CommonComments extends React.Component {
             + `action=uc&userid=${localStorage.userid}&uniquekey=${this.props.uniquekey}`
 
         fetch(url, fetchOptions)
-            .then(response => response.json(),this.errorHandler)
-            .then(json=>{notification.success({message:'ReactNews提醒', description:'收藏成功'})})
+            .then(response => response.json(), this.errorHandler)
+            .then(json => {
+                notification.success({message: 'ReactNews提醒', description: '收藏成功'})
+            })
     }
 
     render() {
-        let {getFieldProps} = this.props.form
+        let {getFieldDecorator} = this.props.form
         const comments = this.state.comments
 
         // 用户评论展示(只展示最近5条)
@@ -98,8 +100,8 @@ class CommonComments extends React.Component {
                         </Card>
                         <Form onSubmit={this.handleSubmit.bind(this)}>
                             <FormItem label='您的评论'>
-                                <Input type='textarea'
-                                       placeholder='请输入评论' {...getFieldProps('remark', {initialValue: ''})}/>
+                                {getFieldDecorator('remark', {initialValue: ''})(<Input type='textarea'
+                                                                                        placeholder='请输入评论'/>)}
                             </FormItem>
                             <Button type='primary' htmlType='submit'>提交评论</Button>
                             &nbsp;&nbsp;

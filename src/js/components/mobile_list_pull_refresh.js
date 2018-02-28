@@ -1,14 +1,15 @@
 import React from 'react'
 import {Row, Col} from 'antd'
 import {Router, Route, Link} from 'react-router-dom'
+import ReactPullToRefresh from 'react-pull-to-refresh'
 import Tloader from 'react-touch-loader'
 
-export default class MobileList extends React.Component {
+
+export default class MobileListPullRefresh extends React.Component {
     constructor() {
         super()
 
         // this.state.news 用来接收fetch() 获得的数据.
-        //
         this.state = {
             news: '',
             count: 5,
@@ -33,7 +34,7 @@ export default class MobileList extends React.Component {
             .then(json => this.setState({news: json}))
     }
 
-    //Tloader loadMore方法, 用来加载更多数据, 以及表现加载时的圈圈特效
+    // Tloader 组件的加载更多方法
     loadMore(resolve) {
         setTimeout(
             () => {
@@ -43,7 +44,6 @@ export default class MobileList extends React.Component {
                 })
 
                 // 从 api 获取数据
-                // 定义 fetch() 的选项
                 let fetchOptions = {
                     method: 'GET'
                 }
@@ -58,10 +58,31 @@ export default class MobileList extends React.Component {
                 // 判断是否还有需要加载的内容. 条件是50条数据以内.
                 this.setState({hasMore: this.state.count > 0 && this.state.count < 50})
 
+                // resolve方法结束加载更多的动画效果
                 resolve()
             }, 2e3)
     }
 
+// ReactPullToRefresh 组件的下拉刷新事件
+    handleRefresh(resolve) {
+        let fetchOptions = {
+            method: 'GET'
+        }
+
+        // 获取新闻列表的api
+        fetch(`http://newsapi.gugujiankong.com/Handler.ashx?`
+            + `action=getnews&type=${this.props.type}&count=${this.props.count}`
+            , fetchOptions)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({news: json})
+
+                // 这里使用 MobileListPullRefresh 组件自带的 resolve 方法来结束加载动画
+                resolve()
+            })
+    }
+
+    //Tloader 组件所需的设置
     componentDidMount() {
         setTimeout(() => {
             this.setState({
@@ -104,12 +125,19 @@ export default class MobileList extends React.Component {
             <div>
                 <Row>
                     <Col span={24}>
+                        {/*使用下拉刷新组件*/}
+                        <ReactPullToRefresh onRefresh={this.handleRefresh.bind(this)}
+                                            style={{textAlign: 'center'}}>
+                            {/*根据文档, 显示下拉图标和文本*/}
+                            <span className='genericon genericon-next'/>
+                            <div>
+                                <Tloader className='main' onLoadMore={this.loadMore.bind(this)}
+                                         hasMore={this.state.hasMore} initializing={this.state.initializing}>
 
-                        <Tloader className='main' onLoadMore={this.loadMore.bind(this)}
-                                 hasMore={this.state.hasMore} initializing={this.state.initializing}>
-
-                            {newsList}
-                        </Tloader>
+                                    {newsList}
+                                </Tloader>
+                            </div>
+                        </ReactPullToRefresh>
                     </Col>
                 </Row>
             </div>

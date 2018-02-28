@@ -19,10 +19,10 @@ export default class MobileNewsDetails extends React.Component {
             method: 'GET'
         }
 
-        // url中的uniquekey从react-router的路由参数中获取. 所以这里使用 this.props.params.key 来取值
+        // url中的uniquekey从react-router的路由参数中获取. 所以这里使用 this.props.match.params.key 来取值
         // 在 <route> 中应该写为 <Route component={PCNewsDetails} path='/details/:uniquekey'></Route>
         let url = `http://newsapi.gugujiankong.com/Handler.ashx?` +
-            `action=getnewsitem&uniquekey=${this.props.params.uniquekey}`
+            `action=getnewsitem&uniquekey=${this.props.match.params.uniquekey}`
 
         fetch(url, fetchOptions)
             .then(response => response.json())
@@ -50,7 +50,7 @@ export default class MobileNewsDetails extends React.Component {
                     </Row>
                 </div>
                 {/*加载评论组件*/}
-                <CommonComments uniquekey={this.props.params.uniquekey} count={5}/>
+                <CommonComments uniquekey={this.props.match.params.uniquekey} count={5}/>
                 <MobileFooter/>
                 <BackTop/>
             </div>

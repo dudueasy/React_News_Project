@@ -8,7 +8,7 @@ import {
     Modal
 } from 'antd';
 
-import {Link} from 'react-router'
+import {Link} from 'react-router-dom'
 
 
 const FormItem = Form.Item
@@ -122,7 +122,7 @@ class PCHeader extends React.Component {
 
 // 在 render(){} 里面才能写 React 表达式
     render() {
-        let {getFieldProps} = this.props.form;
+        let {getFieldDecorator} = this.props.form;
 
         // 这里定义一个React 元素, 根据this.state.hasLogin 来决定元素的内容
         const userShow = this.state.hasLogin ?
@@ -143,12 +143,12 @@ class PCHeader extends React.Component {
 
 
         return (
-            <header>
+            <header class="pc-header">
                 <Row>
                     <Col span={1}/>
                     <Col span={4}>
                         <a href="/" class="logo">
-                            <img src="src/images/logo.png" alt="logo"/>
+                            <img src="/src/images/logo.png" alt="logo"/>
                             <span>ReactNews</span>
                         </a>
                     </Col>
@@ -189,15 +189,15 @@ class PCHeader extends React.Component {
                                 <TabPane tab="注册" key="2">
                                     <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
                                         <FormItem label="账户">
-                                            <Input placeholder="请输入您的账号" {...getFieldProps('r_userName')}/>
+                                            {getFieldDecorator('r_userName')(<Input placeholder="请输入您的账号" />)}
                                         </FormItem>
                                         <FormItem label="密码">
-                                            <Input type="password"
-                                                   placeholder="请输入您的密码" {...getFieldProps('r_password')}/>
+                                            {getFieldDecorator('r_password')(<Input type="password"
+                                                                                    placeholder="请输入您的密码"/>)}
                                         </FormItem>
                                         <FormItem label="确认密码">
-                                            <Input type="password"
-                                                   placeholder="请再次输入您的密码" {...getFieldProps('r_confirmPassword')}/>
+                                            {getFieldDecorator('r_confirmPassword')(<Input type="password"
+                                                                                           placeholder="请再次输入您的密码"/>)}
                                         </FormItem>
                                         <Button type="primary" htmlType="submit">注册</Button>
                                     </Form>
@@ -205,11 +205,11 @@ class PCHeader extends React.Component {
                                 <TabPane tab="登陆" key="1">
                                     <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
                                         <FormItem label="账户">
-                                            <Input placeholder="请输入您的账号" {...getFieldProps('userName')}/>
+                                            {getFieldDecorator('userName')(<Input placeholder="请输入您的账号"/>)}
                                         </FormItem>
                                         <FormItem label="密码">
-                                            <Input type="password"
-                                                   placeholder="请输入您的密码" {...getFieldProps('password')}/>
+                                            {getFieldDecorator('password')(<Input type="password"
+                                                                                  placeholder="请输入您的密码"/>)}
                                         </FormItem>
                                         <Button type="primary" htmlType="submit">登陆</Button>
                                     </Form>

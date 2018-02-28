@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card} from 'antd'
-import {Router, Route, Link, browserHistory, } from 'react-router'
+import {Router, Route, Link, browserHistory, } from 'react-router-dom'
 
 // 引用示例: <PCNewsImageBlock cardTitle='国际头条' count='6' type='guoji' width='400px' imageWidth='112px'/>
 

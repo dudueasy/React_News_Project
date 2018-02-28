@@ -16,7 +16,7 @@ import PCFooter from './pc_footer'
 const TabPane = Tabs.TabPane
 const FormItem = Form.Item
 
-import {Link} from 'react-router'
+import {Link} from 'react-router-dom'
 
 export default class PCUserCenter extends React.Component {
     constructor() {
