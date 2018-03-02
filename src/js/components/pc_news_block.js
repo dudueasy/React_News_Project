@@ -24,7 +24,6 @@ export default class PCNewsBlock extends React.Component {
         if (nextProps.type !== this.props.type) {
             // 更改 state而不是 props(props不应该被自身修改), 允许 componentDidMount 按照新的 this.state.type 来执行.
             this.setState({type: nextProps.type}, this.componentWillMount)
-
         }
     }
 

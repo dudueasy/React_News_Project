@@ -39,6 +39,7 @@ export default class PCNewsDetails extends React.Component {
     }
 
     render() {
+
         return (
             <div class="news-detail-wrapper">
                 <PCHeader/>
